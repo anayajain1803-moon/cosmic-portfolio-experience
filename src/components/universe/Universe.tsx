@@ -57,7 +57,7 @@ function AICore() {
     halo.current!.scale.set(s, s, 1);
   });
   return (
-    <group ref={group} position={[0, 0, 0]}>
+    <group ref={group} position={[0, 1.4, 0]} scale={0.8}>
       <Float speed={1.5} floatIntensity={0.6}>
         <mesh>
           <icosahedronGeometry args={[1, 8]} />
