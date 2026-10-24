@@ -149,7 +149,7 @@ export function About() {
 
 export function Skills() {
   const [sel, setSel] = useState(0);
-  const s = profile.skills[sel];
+  const s = profile.skills[sel]!;
   return (
     <section id="skills" className="mx-auto max-w-6xl px-6 py-32 text-star">
       <Heading eyebrow="02 — Arsenal" title="A system of planets" />
@@ -215,7 +215,7 @@ export function Projects() {
     <section id="projects" className="mx-auto max-w-6xl px-6 py-32 text-star">
       <Heading eyebrow="03 — Missions" title="Selected work" />
       <div className="grid gap-6 md:grid-cols-2">
-        <Reveal className="md:col-span-2"><Card p={feat} big /></Reveal>
+        <Reveal className="md:col-span-2"><Card p={feat!} big /></Reveal>
         {rest.map((p, i) => <Reveal key={p.name} delay={i * 0.1}><Card p={p} /></Reveal>)}
       </div>
     </section>

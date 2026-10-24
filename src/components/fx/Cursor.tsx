@@ -33,7 +33,7 @@ export function Cursor() {
     const tick = () => {
       ctx.clearRect(0, 0, c.width, c.height);
       for (let i = parts.length - 1; i >= 0; i--) {
-        const p = parts[i];
+        const p = parts[i]!;
         p.x += p.vx; p.y += p.vy; p.life -= 0.025;
         if (p.life <= 0) { parts.splice(i, 1); continue; }
         ctx.fillStyle = `rgba(140,180,255,${p.life * 0.7})`;
