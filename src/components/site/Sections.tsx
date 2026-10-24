@@ -194,7 +194,7 @@ export function Skills() {
 
 export function Projects() {
   const [feat, ...rest] = profile.projects;
-  const Card = ({ p, big }: { p: typeof feat; big?: boolean }) => (
+  const Card = ({ p, big }: { p: (typeof profile.projects)[number]; big?: boolean }) => (
     <Tilt className={`glass group h-full rounded-2xl p-8 ${big ? "md:col-span-2" : ""}`}>
       <div className="[transform:translateZ(40px)]">
         <div className={`relative mb-6 overflow-hidden rounded-xl border ${big ? "h-56 md:h-72" : "h-40"}`} style={{ background: "radial-gradient(circle at 70% 30%, color-mix(in oklab, var(--glow) 45%, transparent), transparent 60%), linear-gradient(135deg, var(--space-3), var(--space-5))" }}>
