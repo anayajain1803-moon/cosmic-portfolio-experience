@@ -2,13 +2,18 @@
 export const profile = {
   name: "Anaya Jain",
   initials: "AJ",
-  tagline: "AI Engineer · Full Stack Developer · ML Enthusiast",
-  titles: ["AI Engineer", "Full Stack Developer", "ML Engineer", "Backend Developer", "Creator", "Builder"],
+  tagline: "Cloud Computing · Web Development · Digital Marketing · Content Creation",
+  titles: ["an IT graduate", "a cloud enthusiast", "a web developer", "a digital marketer", "a content creator", "an event organizer"],
   email: "hello@example.com",
   phone: "+00 00000 00000",
   location: "City, State",
-  about:
-    "I design and build intelligent systems that feel effortless to use. My work sits where machine learning meets craft — models that reason, interfaces that breathe, and backends that never blink. I care about the details nobody asks for, and I ship.",
+  about: [
+    "Technology excites me, but what motivates me even more is using it to create meaningful impact.",
+    "I'm an Information Technology graduate with interests spanning Cloud Computing, Web Development, Digital Marketing, Content Creation, and Event Management.",
+    "I'm currently building my knowledge in AWS and Azure, while exploring how cloud technologies help businesses innovate and scale.",
+    "Beyond technical skills, I enjoy volunteering, organizing events, and collaborating with diverse teams. From managing social media and creating content to coordinating events and contributing to marketing initiatives, I thrive in environments where creativity, communication, and problem-solving come together.",
+    "I'm always eager to learn, take on new challenges, and connect with people who are passionate about technology, innovation, and growth. Currently, I'm seeking opportunities where I can contribute, gain hands-on experience, and continue growing — whether in Cloud Computing, IT, Event Management, Marketing, or Content Creation.",
+  ],
   education: { college: "Your College", degree: "B.Tech, Computer Science", year: "2022 — 2026", cgpa: "9.0" },
   stats: [
     { label: "Projects shipped", value: 24 },

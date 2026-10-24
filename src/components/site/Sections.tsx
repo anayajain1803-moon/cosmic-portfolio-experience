@@ -76,7 +76,7 @@ export function Hero() {
           </motion.span>
         ))}
       </h1>
-      <p className="mt-6 text-lg text-ink-soft md:text-2xl">I am an <Rotator /></p>
+      <p className="mt-6 text-lg text-ink-soft md:text-2xl">I am <Rotator /></p>
       <div className="mt-10 flex flex-wrap justify-center gap-3">
         <Btn onClick={() => scrollToId("projects")}>View Projects <FiArrowUpRight /></Btn>
         <Btn href={profile.resume} variant="ghost"><FiDownload /> Download Resume</Btn>
@@ -111,7 +111,7 @@ export function About() {
           </div>
           <AnimatePresence mode="wait">
             <motion.div key={tab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={spring} className="min-h-40 text-lg leading-relaxed">
-              {tab === "bio" && <p>{profile.about}</p>}
+              {tab === "bio" && profile.about.map((p, i) => <p key={i} className={i ? "mt-4" : undefined}>{p}</p>)}
               {tab === "edu" && (
                 <dl className="grid grid-cols-2 gap-4">
                   {Object.entries(profile.education).map(([k, v]) => (<div key={k}><dt className="eyebrow text-ink-soft">{k}</dt><dd className="mt-1">{v}</dd></div>))}
