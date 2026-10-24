@@ -19,6 +19,7 @@ export const profile = {
       school: "JECRC University",
       degree: "Bachelor of Technology, Computer Science",
       period: "Oct 2026 — Present",
+      grade: "",
       note: "",
     },
     {
