@@ -4,7 +4,7 @@ import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import Lenis from "lenis";
 import { profile } from "@/data/profile";
 import { Nav } from "@/components/site/Nav";
-import { Hero, About, Skills, Projects, Experience, Certifications, Contact, Footer } from "@/components/site/Sections";
+import { Hero, About, Skills, Projects, Experience, Tools, Contact, Footer } from "@/components/site/Sections";
 import { Cursor } from "@/components/fx/Cursor";
 import { Loader } from "@/components/fx/Loader";
 
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({ "@context": "https://schema.org", "@type": "Person", name: profile.name, jobTitle: profile.titles[0], email: profile.email, sameAs: Object.values(profile.social) }),
+        children: JSON.stringify({ "@context": "https://schema.org", "@type": "Person", name: profile.name, jobTitle: "Information Technology Graduate", email: profile.email, sameAs: Object.values(profile.social) }),
       },
     ],
   }),
@@ -69,7 +69,7 @@ function Index() {
         <Skills />
         <Projects />
         <Experience />
-        <Certifications />
+        <Tools />
         <Contact />
       </main>
       <Footer />
