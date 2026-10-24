@@ -1,7 +1,7 @@
 // Placeholder profile — replace every value with your real details.
 export const profile = {
-  name: "Your Name",
-  initials: "YN",
+  name: "Anaya Jain",
+  initials: "AJ",
   tagline: "AI Engineer · Full Stack Developer · ML Enthusiast",
   titles: ["AI Engineer", "Full Stack Developer", "ML Engineer", "Backend Developer", "Creator", "Builder"],
   email: "hello@example.com",
@@ -48,7 +48,7 @@ export const profile = {
   ],
   social: {
     github: "https://github.com/",
-    linkedin: "https://linkedin.com/",
+    linkedin: "https://www.linkedin.com/in/anaya-jain-298044258",
     twitter: "https://twitter.com/",
     instagram: "https://instagram.com/",
   },
