@@ -2,7 +2,7 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
 import { profile } from "@/data/profile";
 
-export const SECTIONS = ["home", "about", "skills", "projects", "experience", "certifications", "contact"] as const;
+export const SECTIONS = ["home", "about", "skills", "projects", "experience", "tools", "contact"] as const;
 
 export function scrollToId(id: string) {
   const el = document.getElementById(id);

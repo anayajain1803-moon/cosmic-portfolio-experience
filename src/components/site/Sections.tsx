@@ -76,7 +76,7 @@ export function Hero() {
           </motion.span>
         ))}
       </h1>
-      <p className="mt-6 text-lg text-ink-soft md:text-2xl">I am an <Rotator /></p>
+      <p className="mt-6 text-lg text-ink-soft md:text-2xl">I am <Rotator /></p>
       <div className="mt-10 flex flex-wrap justify-center gap-3">
         <Btn onClick={() => scrollToId("projects")}>View Projects <FiArrowUpRight /></Btn>
         <Btn href={profile.resume} variant="ghost"><FiDownload /> Download Resume</Btn>
@@ -111,11 +111,18 @@ export function About() {
           </div>
           <AnimatePresence mode="wait">
             <motion.div key={tab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={spring} className="min-h-40 text-lg leading-relaxed">
-              {tab === "bio" && <p>{profile.about}</p>}
+              {tab === "bio" && profile.about.map((p, i) => <p key={i} className={i ? "mt-4" : undefined}>{p}</p>)}
               {tab === "edu" && (
-                <dl className="grid grid-cols-2 gap-4">
-                  {Object.entries(profile.education).map(([k, v]) => (<div key={k}><dt className="eyebrow text-ink-soft">{k}</dt><dd className="mt-1">{v}</dd></div>))}
-                </dl>
+                <div className="space-y-5">
+                  {profile.education.map((e) => (
+                    <div key={e.school}>
+                      <p className="eyebrow text-ink-soft">{e.period}{e.grade ? ` · Grade ${e.grade}` : ""}</p>
+                      <h4 className="mt-1 font-display text-2xl">{e.school}</h4>
+                      <p className="text-ink-soft">{e.degree}</p>
+                      {e.note && <p className="mt-2 text-sm text-ink-soft">{e.note}</p>}
+                    </div>
+                  ))}
+                </div>
               )}
               {tab === "wins" && <ul className="space-y-3">{profile.achievements.map((a) => <li key={a} className="flex gap-3"><FiAward className="mt-1 shrink-0" /> {a}</li>)}</ul>}
             </motion.div>
@@ -125,7 +132,7 @@ export function About() {
           {profile.stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
               <Tilt className="glass-light group h-full rounded-2xl p-6">
-                <div className="font-display text-5xl"><Counter to={s.value} />+</div>
+                <div className="font-display text-5xl"><Counter to={s.value} />{s.suffix}</div>
                 <div className="mt-2 text-xs uppercase tracking-widest text-ink-soft">{s.label}</div>
               </Tilt>
             </Reveal>
@@ -180,9 +187,9 @@ export function Skills() {
             <p className="eyebrow text-glow">Planet data</p>
             <h3 className="mt-2 font-display text-5xl">{s.name}</h3>
             <p className="mt-4 text-star-soft">{s.desc}</p>
-            <div className="mt-6 grid grid-cols-2 gap-4">
-              <div><p className="eyebrow text-star-soft">Experience</p><p className="font-display text-3xl">{s.years} yrs</p></div>
-              <div><p className="eyebrow text-star-soft">Projects</p><p className="font-display text-3xl">{s.projects}</p></div>
+            <div className="mt-6">
+              <p className="eyebrow text-star-soft">Applied at</p>
+              <p className="mt-1 font-display text-2xl">{s.used}</p>
             </div>
             <div className="mt-6 flex flex-wrap gap-2">{s.stack.map((t) => <span key={t} className="rounded-full border px-3 py-1 text-xs">{t}</span>)}</div>
           </motion.div>
@@ -204,10 +211,12 @@ export function Projects() {
         <h3 className="font-display text-3xl">{p.name}</h3>
         <p className="mt-2 text-star-soft">{p.desc}</p>
         <div className="mt-4 flex flex-wrap gap-2">{p.stack.map((t) => <span key={t} className="rounded-full bg-star/10 px-3 py-1 font-mono text-xs">{t}</span>)}</div>
-        <div className="mt-6 flex gap-4 text-sm">
-          <a href={p.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-glow"><FiGithub /> GitHub</a>
-          <a href={p.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-glow"><FiArrowUpRight /> Live demo</a>
-        </div>
+        {(p.github || p.demo) && (
+          <div className="mt-6 flex gap-4 text-sm">
+            {p.github && <a href={p.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-glow"><FiGithub /> GitHub</a>}
+            {p.demo && <a href={p.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:text-glow"><FiArrowUpRight /> Live demo</a>}
+          </div>
+        )}
       </div>
     </Tilt>
   );
@@ -231,10 +240,12 @@ export function Experience() {
           <motion.li key={e.company} className="relative mb-10" initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ ...spring, delay: i * 0.1 }}>
             <motion.span className="absolute -left-[41px] top-6 h-4 w-4 rounded-full bg-glow shadow-[var(--shadow-glow)]" animate={{ scale: [1, 1.3, 1] }} transition={{ repeat: Infinity, duration: 2.4, delay: i * 0.3 }} />
             <Tilt className="glass group rounded-2xl p-6">
-              <p className="font-mono text-xs text-glow">{e.duration}</p>
+              <p className="font-mono text-xs text-glow">{e.duration}{e.location ? ` · ${e.location}` : ""}</p>
               <h3 className="mt-1 font-display text-3xl">{e.role}</h3>
-              <p className="text-star-soft">{e.company}</p>
-              <p className="mt-3 text-sm text-star-soft">{e.text}</p>
+              <p className="text-star-soft">{e.company} · {e.type}</p>
+              <ul className="mt-3 space-y-2 text-sm text-star-soft">
+                {e.bullets.map((b) => <li key={b} className="flex gap-3"><span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-glow" /> {b}</li>)}
+              </ul>
             </Tilt>
           </motion.li>
         ))}
@@ -243,20 +254,44 @@ export function Experience() {
   );
 }
 
-export function Certifications() {
+export function Tools() {
   return (
-    <section id="certifications" className="mx-auto max-w-6xl px-6 py-32 text-star">
-      <Heading eyebrow="05 — Clearances" title="Certifications" />
+    <section id="tools" className="mx-auto max-w-6xl px-6 py-32 text-star">
+      <Heading eyebrow="05 — Clearances" title="Tools & platforms" />
       <div className="grid gap-6 md:grid-cols-3">
-        {profile.certifications.map((c, i) => (
+        {profile.tools.map((c, i) => (
           <Reveal key={c.name} delay={i * 0.08}>
             <Tilt className="glass group h-full rounded-2xl p-6">
-              <motion.div whileHover={{ rotate: 180 }} transition={spring} className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-full border text-glow"><FiAward size={20} /></motion.div>
+              <span className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-full border font-display text-xl text-glow">{c.name[0]}</span>
               <h3 className="font-display text-2xl">{c.name}</h3>
-              <p className="mt-2 text-sm text-star-soft">{c.issuer} · {c.year}</p>
+              <p className="mt-2 text-sm text-star-soft">{c.kind}</p>
             </Tilt>
           </Reveal>
         ))}
+      </div>
+      <div className="mt-6 grid gap-6 md:grid-cols-2">
+        <Reveal className="glass rounded-2xl p-6">
+          <p className="eyebrow text-glow">Volunteering</p>
+          <ul className="mt-4 space-y-3">
+            {profile.volunteering.map((v) => (
+              <li key={v.org} className="flex flex-wrap items-baseline justify-between gap-2">
+                <span><span className="font-display text-xl">{v.role}</span> <span className="text-star-soft">· {v.org}</span></span>
+                <span className="font-mono text-xs text-star-soft">{v.period}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+        <Reveal className="glass rounded-2xl p-6" delay={0.08}>
+          <p className="eyebrow text-glow">Languages</p>
+          <ul className="mt-4 space-y-3">
+            {profile.languages.map((l) => (
+              <li key={l.name} className="flex flex-wrap items-baseline justify-between gap-2">
+                <span className="font-display text-xl">{l.name}</span>
+                <span className="font-mono text-xs text-star-soft">{l.level}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );
